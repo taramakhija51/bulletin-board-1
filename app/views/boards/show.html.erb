@@ -1,17 +1,15 @@
-      <div>
-        <a href="/boards">
-          Bulletin Board
-        </a>
-      </div>
+<div>
+  <a href="/boards">
+    Bulletin Board
+  </a>
+</div>
+
 <div>
   <div>
     <h1>
-    <%= @the_board.name %>
+      <%= @the_board.name %>
     </h1>
-    <div>
-
-
-    </div>
+    <div></div> <!-- Empty div, can be removed if unnecessary -->
 
     <dl>
       <dt>
@@ -20,24 +18,54 @@
       <dd>
         <%= @the_board.name %>
       </dd>
-      <form action="/insert_post" method="post">
-        <div>
-        <label for="title">Title</label>
-        <input id="title" type="text" name="title">>
-        </div>
+    </dl>
 
-        <div>
-        <label for="body">Body</label>
-        <textarea name="body" id="body_field" cols="30" rows="10"></textarea>
-        </div>
-        
-        <div>
-        <label for="expires on">Expires on</label>
-        <input type="date" id="expires_on_field" name="expires on"><input>
-        </div>
-        <button>Add post</button>
-        </form>
-      
-<hr>
-<h1>Active posts</h1>
+    <!-- Form to Add Post -->
+<form action="/insert_post" method="post">
+  <div>
+    <label for="title">Title</label>
+    <input id="title" type="text" name="title">
+  </div>
 
+  <div>
+    <label for="body">Body</label>
+    <textarea name="body" id="body_field" cols="30" rows="10"></textarea>
+  </div>
+  
+  <div>
+    <label for="expires_on_field">Expires on</label>
+    <input type="date" id="expires_on_field" name="expires_on">
+  </div>
+
+  <div>
+    <label for="board_id">Board ID</label>
+    <input type="text" id="board_id" name="board_id">
+  </div>
+
+  <button type="submit">Add post</button>
+</form>
+
+    <hr>
+    <h1>Active posts</h1>
+    <table style="width:100%">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Body</th>
+          <th>Posted On</th>
+          <th>Expires On</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @list_of_posts.each do |a_post| %>
+          <tr>
+            <td><%= a_post.title %></td>
+            <td><%= a_post.body %></td>
+            <td><%= a_post.created_at %></td>
+            <td><%= a_post.expires_on %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

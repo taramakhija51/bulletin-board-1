@@ -13,6 +13,10 @@ class BoardsController < ApplicationController
     matching_boards = Board.where({ :id => the_id })
 
     @the_board = matching_boards.at(0)
+    @list_of_boards = matching_boards.order({ :created_at => :desc })
+    matching_posts = Post.all
+
+    @list_of_posts = matching_posts.order({ :created_at => :desc })
 
     render({ :template => "boards/show" })
   end
